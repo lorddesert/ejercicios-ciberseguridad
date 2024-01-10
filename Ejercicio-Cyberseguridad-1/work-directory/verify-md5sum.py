@@ -35,8 +35,9 @@ def verify_files_md5sum(files):
     i = 0
     for file in files:
         print(i)
-        if not (hashlib.md5(read_file(file[0])).hexdigest() == file[1]):
-            responses.append(f'The file {file[0]} with hash {file[1]} has been compromised.')
+        current_hash = hashlib.md5(read_file(file[0])).hexdigest()
+        if not (current_hash == file[1]):
+            responses.append(f'The file {file[0]} has been compromised.\n\n original hash: {file[1]}\ncurrent hash: {current_hash}')
         i = i + 1
 
     for res in responses:
